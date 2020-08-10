@@ -6,7 +6,7 @@ const app = express();
 
 //Adicionando uma requisição para a rota raíz ('/') da aplicação
 app.get('/', (req, res) => {
-    res.send('<h1>Its Work!</h1>');
+    res.send('<h1>Exemplo de retorno de uma lista e de um item específico da lista</h1>');
 });
 
 //Nova rota

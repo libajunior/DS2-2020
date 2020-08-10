@@ -9,7 +9,7 @@ const porta = 3000;
 
 //Adicionando uma requisição para a rota raíz ('/') da aplicação
 app.get('/', (req, res) => {
-    res.send('<h1>Its Work!</h1>');
+    res.send('<h1>Exemplo utilizando o Método GET retornando uma lista de string</h1>');
 });
 
 //Cria uma lista de compras (vetor)
@@ -28,7 +28,7 @@ app.get('/listaDeCompra', (req, res) => {
 
 });
 
-//Rota que devolve a lista de compras
+//Rota que devolve o item indicado na URL como parametro (:item)
 app.get('/listaDeCompra/:item', (req, res) => {
 
     var item = req.params.item;

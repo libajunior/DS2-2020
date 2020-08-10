@@ -13,7 +13,7 @@ const porta = 3000;
 
 //Adicionando uma requisição para a rota raíz ('/') da aplicação
 app.get('/', (req, res) => {
-    res.send('<h1>Utilizando o Método POST</h1>');
+    res.send('<h1>Exemplo utilizando o Método POST com envio de string</h1>');
 });
 
 //Cria uma lista de compras (vetor)
@@ -32,7 +32,7 @@ app.get('/listaDeCompra', (req, res) => {
 
 });
 
-//Enviar um item de compra
+//Adicionar um item de compra
 app.post('/listaDeCompra', (req,res) => {
     var item = req.body;
 
