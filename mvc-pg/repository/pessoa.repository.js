@@ -1,13 +1,14 @@
 const conn = require('../pg-connection')
 
+//Camada de Modelo
 module.exports = {
 
     find: () => {
-        return conn.query('select * from pessoa');
+        return conn.query('select * from pessoa order by id');
     },
 
     findOne: ( id ) => {
-        return conn.query('select * from pessoa where id = '+ id);
+        return conn.query('select * from pessoa where id = $1', [ id ]);
     },
 
     create: ( pessoa ) => {
@@ -16,8 +17,11 @@ module.exports = {
     },
 
     update: ( pessoa ) => {
-        return conn.query('update pessoa set nome = $1, email = $2, fone = $3, endereco = $4, status = $5 where id = $6  returning *', 
+        return conn.query('update pessoa set nome = $1, email = $2, fone = $3, endereco = $4, status = $5 where id = $6 returning *', 
                           [pessoa.nome, pessoa.email, pessoa.fone, pessoa.endereco, pessoa.status, pessoa.id]);
-    }
+    },
 
+    delete: ( id ) => {
+        return conn.query('delete from pessoa where id = $1', [ id ]);
+    }
 }

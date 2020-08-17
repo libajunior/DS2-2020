@@ -11,7 +11,10 @@ routes.post('/pessoas', PessoaController.create);
 //Retorna apenas o item com o ID passado por parametro na URI
 routes.get('/pessoas/:id', PessoaController.findOne);
 
-//Altera o item com o ID passado por parametro na URI pelo objeto anexado
+//Altera o item com o ID passado por parametro na URI
 routes.put('/pessoas/:id', PessoaController.update);
+
+//Remove o item com o ID passado por parametro na URI
+routes.delete('/pessoas/:id', PessoaController.delete);
 
 module.exports = routes;

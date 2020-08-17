@@ -1,5 +1,6 @@
 const pessoaRepository = require('../repository/pessoa.repository');
 
+//Camada Controller
 module.exports = {
     
     //Retorna TODOS
@@ -44,12 +45,13 @@ module.exports = {
                 res.status(500).send({ msg: error.message });
             });        
     },
-    
+
     //Altera um registro
-    update: (req, res) => {
+    update:(req, res) => {
+        //Pega o conteúdo do corpo da requisição
         const pessoa = req.body;
 
-        //Força o ID da URI para ser o id do objeto
+        //Atribui o ID do item baseado no parametro da URL
         pessoa.id = req.params.id;
 
         pessoaRepository.update( pessoa )
@@ -60,13 +62,32 @@ module.exports = {
                 } else {
                     res.status(404).send({ msg: 'Registro não encontrado' });
                 }
-
+                
             })
             .catch((error) => {
                 res.status(500).send({ msg: error.message });
             });        
     },
 
+    //Remove um registro
+    delete:(req, res) => {
 
+        //Pega o ID a ser excluído através da URL
+        var id = req.params.id;
+
+        pessoaRepository.delete( id )
+            .then((result) => {
+
+                if (result.rowCount > 0){
+                    res.status(204).send();
+                } else {
+                    res.status(404).send({ msg: 'Registro não encontrado' });
+                }
+                
+            })
+            .catch((error) => {
+                res.status(500).send({ msg: error.message });
+            });        
+    },
 
 }
