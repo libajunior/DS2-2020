@@ -9,7 +9,7 @@ const usuarioRoute = require('./usuario.route');
 const fotoRoute = require('./foto.route');
 const curtidaRoute = require('./curtida.route');
 const comentarioRoute = require('./comentario.route');
-const { route } = require('./cidade.route');
+
 
 routes.use('/cidades', cidadeRoute);
 routes.use('/pessoas', pessoaRoute);
