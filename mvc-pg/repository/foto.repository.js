@@ -9,11 +9,11 @@ module.exports = {
     },
     create: (foto) => {
         return conn.query('insert into foto(usuario_id, descricao, caminho) values($1,$2,$3) returning *', 
-                [foto.usuario.id, foto.descrico, foto.caminho]);
+                [foto.usuario.id, foto.descricao, foto.caminho]);
     },
     update: (foto) => {
         return conn.query('update foto set usuario_id = $1, descricao = $2, caminho = $3 where id = $4 returning *', 
-                [foto.usuario.id, foto.descrico, foto.caminho, foto.id]);
+                [foto.usuario.id, foto.descricao, foto.caminho, foto.id]);
     },
     delete: (id) => {
         return conn.query('delete from foto where id = $1', [id]);
