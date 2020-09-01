@@ -1,14 +1,28 @@
 const fotoRepository = require('../repository/foto.repository');
+const usuarioRepository = require('../repository/usuario.repository')
 
 module.exports = {
-    find: (req,res)=> {
-        fotoRepository.find()
-            .then((result) => {
-                res.send(result.rows);
-            })
-            .catch((error) => {
-                res.status(500).send({ msg: error.message });
-            });
+    find: async (req,res) => {
+
+        //Pega o nome do usuário a partir de seu username
+        const usuario = await usuarioRepository.getByUsername( req.username );
+
+        //Existe um usuário com este username?
+        if (usuario) {
+            
+            try {
+
+                //Tenta pegar as fotos deste usuário
+                const fotos = await fotoRepository.find( usuario );
+                res.send(fotos);
+
+            } catch (error) {
+                res.status(500).send(error);
+            }
+
+        } else {
+            res.status(404).send({message: 'Usuário não foi encontrado'});
+        }
     },
     findOne: (req,res)=> {
         const id = req.params.id;

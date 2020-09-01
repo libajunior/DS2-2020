@@ -1,8 +1,9 @@
 const conn = require('../pg-connection');
 
 module.exports = {
-    find: () => {
-        return conn.query('select * from foto where status = $1 order by id', ['S']);
+    find: async ( usuario ) => {
+        const fotoResult = await conn.query('select * from foto where usuario_id = $1 and status = $2 order by id desc', [usuario.id, 'S']);
+        return fotoResult.rows;
     },
     findOne: (id) => {
         return conn.query('select * from foto where id = $1 and status = $2', [id, 'S']);
