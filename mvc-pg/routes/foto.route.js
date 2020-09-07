@@ -1,12 +1,19 @@
 const express = require('express');
 const routes = express.Router();
 const FotoController = require('../controller/foto.controller');
+const { route } = require('./cidade.route');
 
-routes.get('/', FotoController.find);
-routes.post('/', FotoController.create);
+//Rotas raíz
+routes.route('/')
+    .get(FotoController.find)
+    .post(FotoController.create);
 
-routes.get('/:id([0-9]+)', FotoController.findOne);
-routes.put('/:id([0-9]+)', FotoController.update);
-routes.delete('/:id([0-9]+)', FotoController.delete);
+//Rotas para elementos identificados
+routes.route('/:id([0-9]+)')
+    .get(FotoController.findOne)
+    .delete(FotoController.delete);
+
+//Rota para comentários
+routes.get('/:id([0-9]+)/comentarios', FotoController.getComentarios);
 
 module.exports = routes;

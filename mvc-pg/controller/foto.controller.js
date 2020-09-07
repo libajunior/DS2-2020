@@ -1,5 +1,6 @@
 const fotoRepository = require('../repository/foto.repository');
-const usuarioRepository = require('../repository/usuario.repository')
+const usuarioRepository = require('../repository/usuario.repository');
+const comentarioRepository = require('../repository/comentario.repository');
 
 module.exports = {
     find: async (req,res) => {
@@ -24,22 +25,30 @@ module.exports = {
             res.status(404).send({message: 'Usuário não foi encontrado'});
         }
     },
-    findOne: (req,res)=> {
-        const id = req.params.id;
+    findOne: async (req,res)=> {
+        
+        /**
+         * Dívida técnica para a próxima aula.
+         * 
+         * TO-DO: Validar se a foto é do usário da URL
+         * 
+         */
 
-        fotoRepository.findOne( id )
-            .then((result) => {
+        try {
+            //Pega a foto pelo seu ID
+            const foto = await fotoRepository.findOne( req.params.id );
 
-                if (result.rows.length > 0){
-                    res.send(result.rows[0]);
-                } else {
-                    res.status(404).send({ msg: 'Registro não encontrado' });
-                }
-                
-            })
-            .catch((error) => {
-                res.status(500).send({ msg: error.message });
-            });        
+            //Existe uma foto com este ID?
+            if (foto) {
+                res.send(foto);
+            } else {
+                res.status(404).send({message: 'Foto não foi encontrada'});
+            }
+
+        } catch (error) {
+            //Deu erro?
+            res.status(500).send(error);
+        }               
     },
     create: (req,res)=> {
         const foto = req.body;
@@ -73,23 +82,53 @@ module.exports = {
                 res.status(500).send({ msg: error.message });
             });        
     },
-    delete: (req,res)=> {
+    delete: async (req,res)=> {
 
-        //Pega o ID a ser excluído através da URL
-        var id = req.params.id;
+        try {
+            //Pega a foto pelo seu ID
+            const foto = await fotoRepository.findOne( req.params.id );
 
-        fotoRepository.delete( id )
-            .then((result) => {
-
-                if (result.rowCount > 0){
-                    res.status(204).send();
-                } else {
-                    res.status(404).send({ msg: 'Registro não encontrado' });
-                }
+            //Existe uma foto com este ID?
+            if (foto) {
+                //Marcar a foto como excluída setando o status como 'N'
+                foto.status = 'N';
                 
-            })
-            .catch((error) => {
-                res.status(500).send({ msg: error.message });
-            });        
+                //Atualiza foto
+                await fotoRepository.update(foto);
+                res.send({message: 'Foto foi removida'});
+            } else {
+                res.status(404).send({message: 'Foto não foi encontrada'});
+            }
+
+        } catch (error) {
+            //Deu erro?
+            res.status(500).send(error);
+        }
+
     },
+    getComentarios: async (req,res) => {
+
+        //TO-DO: validar usuario
+
+        try {
+            //Pega a foto pelo seu ID
+            const foto = await fotoRepository.findOne( req.params.id );
+
+            //Existe uma foto com este ID?
+            if (foto) {
+                
+                //Busca os comentarios da foto
+                foto.comentarios = await comentarioRepository.find(foto);
+                res.send(foto);
+
+            } else {
+                res.status(404).send({message: 'Foto não foi encontrada'});
+            }
+
+            
+        } catch (error) {
+            //Deu erro?
+            res.status(500).send(error);
+        }
+    }
 }
