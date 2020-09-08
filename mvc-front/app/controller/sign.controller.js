@@ -1,6 +1,6 @@
 (function(app) {
 
-    app.controller('SignController', function( $scope, SignService, $location ) {
+    app.controller('SignController', function( $scope, SignService, $sessionStorage, $location ) {
 
         //Inicia o objeto usuario
         $scope.usuario = {
@@ -15,6 +15,8 @@
 
             SignService.entrar( $scope.usuario )
                 .then(result => {
+                    //Grava o usuário na sessão
+                    $sessionStorage.logado = result.data;
                     $location.path('/feed');
                 })  
                 .catch(error => {

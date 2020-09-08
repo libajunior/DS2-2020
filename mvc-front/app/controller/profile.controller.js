@@ -1,6 +1,6 @@
 (function(app) {
 
-    app.controller('FeedController', function( $scope, $sessionStorage ) {
+    app.controller('ProfileController', function( $scope, $sessionStorage ) {
         //Pega o usuário logado
         $scope.logado = $sessionStorage.logado;
     });

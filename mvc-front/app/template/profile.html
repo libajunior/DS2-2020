@@ -1,0 +1,40 @@
+<div class="conteudo">
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="assets/img/logomarca.png" loading="lazy">
+            </a>
+
+            <div class="collapse navbar-collapse justify-content-stretch">
+                <div class="navbar-nav ml-auto">
+                    <div class="nav-item btn-group">
+                        <button class="btn btn-link dropdown-toggle" type="button" data-toggle="dropdown">
+                            <img class="avatar avatar-sm" ng-src="{{'assets/img/avatar_default.svg'}}">
+                            {{logado.nome}}
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdownitem btn btn-link" ng-href="#!/{{logado.username}}">Perfil</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdownitem btn btn-link" ng-href="#!/signout">Sair</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="profile container">
+        <div class="row">
+            <div class="col-4">
+                <div class="avatar">
+                    <img src="assets/img/avatar_default.svg">
+                </div>
+            </div>
+            <div class="col-8">
+                <div class="username">
+                    <span>{{logado.username}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
