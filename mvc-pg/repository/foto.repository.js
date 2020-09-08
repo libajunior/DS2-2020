@@ -26,8 +26,9 @@ module.exports = {
         const fotoResult = await conn.query(queryDefault +' where foto.usuario_id = $1 and foto.status = $2 order by foto.id desc', [usuario.id, 'S']);
         return ajustaAtributos(fotoResult.rows);
     },
-    findOne: async (id) => {
-        const fotoResult = await conn.query(queryDefault +' where foto.id = $1 and foto.status = $2 order by foto.id desc', [id, 'S']);
+    findOne: async (usuario, foto_id) => {
+        const fotoResult = await conn.query(queryDefault +' where foto.id = $1 and foto.status = $2 and foto.usuario_id = $3 order by foto.id desc', 
+                                    [foto_id, 'S', usuario.id]);
         return ajustaAtributos(fotoResult.rows)[0];
     },
     create: (foto) => {
