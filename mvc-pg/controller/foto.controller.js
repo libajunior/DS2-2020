@@ -1,6 +1,7 @@
 const fotoRepository = require('../repository/foto.repository');
 const usuarioRepository = require('../repository/usuario.repository');
 const comentarioRepository = require('../repository/comentario.repository');
+const curtidaRepository = require('../repository/curtida.repository');
 
 module.exports = {
     find: async (req,res) => {
@@ -118,8 +119,33 @@ module.exports = {
             if (foto) {
                 
                 //Busca os comentarios da foto
-                foto.comentarios = await comentarioRepository.find(foto);
-                res.send(foto);
+                const comentarios = await comentarioRepository.findByFoto(foto);
+                res.send(comentarios);
+
+            } else {
+                res.status(404).send({message: 'Foto não foi encontrada'});
+            }
+
+            
+        } catch (error) {
+            //Deu erro?
+            res.status(500).send(error);
+        }
+    },
+    getCurtidas: async (req,res) => {
+
+        //TO-DO: validar usuario
+
+        try {
+            //Pega a foto pelo seu ID
+            const foto = await fotoRepository.findOne( req.params.id );
+
+            //Existe uma foto com este ID?
+            if (foto) {
+                
+                //Busca os curtidas da foto
+                const curtidas = await curtidaRepository.findByFoto(foto);
+                res.send(curtidas);
 
             } else {
                 res.status(404).send({message: 'Foto não foi encontrada'});

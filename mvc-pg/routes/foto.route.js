@@ -1,7 +1,6 @@
 const express = require('express');
 const routes = express.Router();
 const FotoController = require('../controller/foto.controller');
-const { route } = require('./cidade.route');
 
 //Rotas raíz
 routes.route('/')
@@ -15,5 +14,8 @@ routes.route('/:id([0-9]+)')
 
 //Rota para comentários
 routes.get('/:id([0-9]+)/comentarios', FotoController.getComentarios);
+
+//Rota para curtidas
+routes.get('/:id([0-9]+)/curtidas', FotoController.getCurtidas);
 
 module.exports = routes;
