@@ -58,13 +58,17 @@
                             ng-click="showCurtidas(foto)">
                             {{foto.curtidas}} curtidas
                         </button>
-                        <button class="btn btn-link">
+
+                        <button class="btn btn-link" ng-if="foto.comentarios == 0">
+                            {{foto.comentarios}} comentarios
+                        </button>
+                        <button class="btn btn-link" data-toggle="modal" data-target="#comentarioModal"
+                            ng-if="foto.comentarios > 0" ng-click="showComentarios(foto)">
                             {{foto.comentarios}} comentarios
                         </button>
                     </div>
                 </div>
             </div>
-            {{ profile.fotos }}
             <div class="col no-fotos text-center" ng-if="profile.fotos.length == 0">
                 <h3>Ainda não há nenhuma publicação</h3>
             </div>
@@ -102,7 +106,7 @@
 <!-- Modal Comentarios -->
 <div class="modal fade" id="comentarioModal" data-backdrop="static" data-keyboard="false" tabindex="-1"
     aria-labelledby="comentarioModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="comentarioModalLabel">Comentarios</h5>
@@ -111,16 +115,27 @@
                 </button>
             </div>
             <div class="modal-body">
+
+                <div class="text-center" ng-if="comentarios.length == 0">
+                    <div class="spinner-border" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item" ng-repeat="comentario in comentarios">
                         <div class="media">
                             <img src="assets/img/avatar_default.svg" class="mr-3 avatar avatar-sm">
                             <div class="media-body">
-                                <p class="mt-0">{{comentario.usuario.username}}</p>
+                                <h5 class="mt-0">{{comentario.usuario.username}} <span class="spacer"></span><small
+                                        class="text-muted">{{comentario.dtpost | date:'dd/MM/yyyy hh:mm'}}</small></h5>
+                                {{ comentario.descricao }}
                             </div>
                         </div>
                     </li>
                 </ul>
+
+
             </div>
         </div>
     </div>
