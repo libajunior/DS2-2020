@@ -1,6 +1,8 @@
 import express from 'express';
 import cors from 'cors';
 
+import cidadeRoute from './router/cidade.route'
+
 export class App {
     public express: express.Application;
 
@@ -17,7 +19,7 @@ export class App {
     }
 
     private routes(): void {
-        console.log('-> Routes')
+        this.express.use('/cidades', cidadeRoute);
     }
 
 }

@@ -9,5 +9,5 @@ export class CidadeEntity {
     nome: string;
 
     @Column({nullable: false, length: 2})
-    uf: string; 
+    uf: string;
 }
