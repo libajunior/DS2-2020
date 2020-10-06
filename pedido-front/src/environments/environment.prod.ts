@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  urlSaaS: 'http://app.materdei.edu.br/pedido'
 };

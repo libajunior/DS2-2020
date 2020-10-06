@@ -1,3 +1,4 @@
+import { CidadeEntity } from './../../../../pedido/src/entity/cidade.entity';
 import { CidadeService } from './../_services/cidade.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -8,15 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CidadeComponent implements OnInit {
 
-  public cidades: [];
+  public displayedColumns: string[] = ['nome', 'uf', 'options'];
+  public cidades: CidadeEntity[] = [];
 
   constructor(private service: CidadeService) { }
 
   ngOnInit(): void {
     this.service.listarTodos().subscribe(result => {
+      console.log(result)
+    
       this.cidades = result as [];
     }, error => {
-      console.log
+      console.log('PAU!',error)
     })
 
   }
