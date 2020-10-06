@@ -33,7 +33,7 @@ export class CidadeService {
   }
 }
 
-class CidadeEntity {
+export class CidadeEntity {
   id: number;
   nome: string;
   uf: string;

@@ -1,5 +1,4 @@
-import { CidadeEntity } from './../../../../pedido/src/entity/cidade.entity';
-import { CidadeService } from './../_services/cidade.service';
+import { CidadeEntity, CidadeService } from './../_services/cidade.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
