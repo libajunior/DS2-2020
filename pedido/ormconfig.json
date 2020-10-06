@@ -6,5 +6,8 @@
     "password": "123456",
     "database": "ds2db",
     "synchronize": true,
-    "logging": ["error"]
+    "logging": ["error"],
+    "entities": [
+      "dist/entity/*.js"
+    ]
 }
