@@ -11,15 +11,23 @@ export class CidadeComponent implements OnInit {
   public displayedColumns: string[] = ['nome', 'uf', 'options'];
   public cidades: CidadeEntity[] = [];
 
+  public errorMessage: string;
+  public loading: boolean;
+
   constructor(private service: CidadeService) { }
 
   ngOnInit(): void {
+    //Inicializar variaveis de controle
+    this.errorMessage = '';
+    this.loading = true;
+
+    //Carrega a lista de cidades
     this.service.listarTodos().subscribe(result => {
-      console.log(result)
-    
       this.cidades = result as [];
+      this.loading = false;
     }, error => {
-      console.log('PAU!',error)
+      this.errorMessage = (error.status == 0) ? 'Não foi possível conectar ao servidor' : error.message;
+      this.loading = false;
     })
 
   }
