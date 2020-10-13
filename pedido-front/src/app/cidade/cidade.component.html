@@ -1,6 +1,56 @@
 <mat-sidenav-container class="sidenav-custom">
     <mat-sidenav #sidenav position="end" disableClose="true">
-        <h1>Formulário</h1>
+        <mat-toolbar>
+            <h2>Adicionar Cidade</h2>
+            <span class="spacer"></span>
+            <button mat-icon-button (click)="sidenav.close()">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar>
+
+        <div class="formulario">
+            <mat-form-field class="full-width">
+                <input matInput placeholder="Nome" [(ngModel)]="cidade.nome">
+            </mat-form-field>
+
+            <mat-form-field class="full-width">
+                <mat-select placeholder="UF" [(value)]="cidade.uf">
+                    <mat-option value="AC">Acre</mat-option>
+                    <mat-option value="AL">Alagoas</mat-option>
+                    <mat-option value="AP">Amapá</mat-option>
+                    <mat-option value="AM">Amazonas</mat-option>
+                    <mat-option value="BA">Bahia</mat-option>
+                    <mat-option value="CE">Ceará</mat-option>
+                    <mat-option value="DF">Distrito Federal</mat-option>
+                    <mat-option value="ES">Espírito Santo</mat-option>
+                    <mat-option value="GO">Goiás</mat-option>
+                    <mat-option value="MA">Maranhão</mat-option>
+                    <mat-option value="MT">Mato Grosso</mat-option>
+                    <mat-option value="MS">Mato Grosso do Sul</mat-option>
+                    <mat-option value="MG">Minas Gerais</mat-option>
+                    <mat-option value="PA">Pará</mat-option>
+                    <mat-option value="PB">Paraíba</mat-option>
+                    <mat-option value="PR">Paraná</mat-option>
+                    <mat-option value="PE">Pernambuco</mat-option>
+                    <mat-option value="PI">Piauí</mat-option>
+                    <mat-option value="RJ">Rio de Janeiro</mat-option>
+                    <mat-option value="RN">Rio Grande do Norte</mat-option>
+                    <mat-option value="RS">Rio Grande do Sul</mat-option>
+                    <mat-option value="RO">Rondônia</mat-option>
+                    <mat-option value="RR">Roraima</mat-option>
+                    <mat-option value="SC">Santa Catarina</mat-option>
+                    <mat-option value="SP">São Paulo</mat-option>
+                    <mat-option value="SE">Sergipe</mat-option>
+                    <mat-option value="TO">Tocantins</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <mat-toolbar>
+            <span class="spacer"></span>
+            <button mat-button (click)="sidenav.close()">Cancelar</button>
+            <button mat-raised-button color="primary" (click)="confirmar()">Confirmar</button>
+        </mat-toolbar>
     </mat-sidenav>
 
     <mat-sidenav-content>

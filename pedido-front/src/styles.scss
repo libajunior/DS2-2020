@@ -13,11 +13,31 @@ body {
     flex: 1 1 auto;
 }
 
+.full-width {
+    width: 100%;
+}
+
 .sidenav-custom {
     height: 100vh;
 
     mat-sidenav {
         width: 650px;
+
+        mat-toolbar {
+            background-color: #fff;
+
+            button {
+                text-transform: uppercase;
+            }
+
+            .mat-raised-button {
+                margin-left: 5px;
+            }
+        }
+
+        .formulario {
+            margin: 0 30px;
+        }
     }
 
     mat-sidenav-content {

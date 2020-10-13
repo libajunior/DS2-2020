@@ -17,6 +17,21 @@ class CidadeController {
 
     }
 
+    public async create(req: Request, res: Response) {
+
+        const cidade = req.body;
+
+        try {
+
+            await getRepository(CidadeEntity).create( cidade );
+            res.status(201).send(cidade);
+
+        } catch (error) {
+            res.status(500).send(error);
+        }
+
+    }
+
 }
 
 export default new CidadeController();

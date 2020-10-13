@@ -14,12 +14,17 @@ export class CidadeComponent implements OnInit {
   public errorMessage: string;
   public loading: boolean;
 
+  public cidade: CidadeEntity = new CidadeEntity();
+
   constructor(private service: CidadeService) { }
 
   ngOnInit(): void {
     //Inicializar variaveis de controle
     this.errorMessage = '';
     this.loading = true;
+
+    this.cidade.nome = 'Itú';
+    this.cidade.uf = 'SP';
 
     //Carrega a lista de cidades
     this.service.listarTodos().subscribe(result => {
@@ -30,6 +35,17 @@ export class CidadeComponent implements OnInit {
       this.loading = false;
     })
 
+  }
+
+  public confirmar(): void {
+    this.loading = true;
+
+    this.service.adicionar(this.cidade).subscribe(result => {
+      console.log('result', result);
+    }, error => {
+      console.log('pau', error);
+      this.errorMessage = error.message;
+    })
   }
 
 }

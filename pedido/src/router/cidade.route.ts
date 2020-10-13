@@ -8,12 +8,13 @@ class CidadeRoute {
     constructor() {
         this.router = Router();
 
-        //Inicio as rotas de cliente
+        //Inicio as rotas de cidade
         this.init();
     }
 
     private init(): void {
         this.router.get('/', cidadeController.findAll)
+        this.router.post('/', cidadeController.create)
     }
 
 }
