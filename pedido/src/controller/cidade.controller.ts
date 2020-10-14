@@ -23,7 +23,7 @@ class CidadeController {
 
         try {
 
-            await getRepository(CidadeEntity).create( cidade );
+            await getRepository(CidadeEntity).save( cidade );
             res.status(201).send(cidade);
 
         } catch (error) {

@@ -1,7 +1,8 @@
 <mat-sidenav-container class="sidenav-custom">
     <mat-sidenav #sidenav position="end" disableClose="true">
         <mat-toolbar>
-            <h2>Adicionar Cidade</h2>
+            <h2 *ngIf="!cidade.id">Adicionar Cidade</h2>
+            <h2 *ngIf="cidade.id">Alterar Cidade</h2>
             <span class="spacer"></span>
             <button mat-icon-button (click)="sidenav.close()">
                 <mat-icon>close</mat-icon>
@@ -60,7 +61,7 @@
                     <h3>Cadastro de Cidades</h3>
                     <span class="spacer"></span>
 
-                    <button mat-icon-button (click)="sidenav.open()">
+                    <button mat-icon-button (click)="adicionar()">
                         <mat-icon>add</mat-icon>
                     </button>
                 </mat-toolbar>
@@ -90,11 +91,11 @@
                                 <mat-icon>more_vert</mat-icon>
                             </button>
                             <mat-menu #menu="matMenu">
-                                <button mat-menu-item>
+                                <button mat-menu-item (click)="editar(cidade)">
                                     <mat-icon>edit</mat-icon>
                                     <span>Alterar</span>
                                 </button>
-                                <button mat-menu-item>
+                                <button mat-menu-item (click)="excluir(cidade)">
                                     <mat-icon>delete</mat-icon>
                                     <span>Excluir</span>
                                 </button>

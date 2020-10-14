@@ -6,8 +6,10 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CidadeComponent } from './cidade/cidade.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { CidadeComponent } from './cidade/cidade.component';
+import { ConfirmDialogComponent } from './_components/confirm-dialog/confirm-dialog.component';
 
 import {MatCardModule} from '@angular/material/card';
 import {MatTableModule} from '@angular/material/table';
@@ -20,11 +22,16 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatDialogModule} from '@angular/material/dialog';
+
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    CidadeComponent
+    CidadeComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +49,9 @@ import {MatSelectModule} from '@angular/material/select';
     MatSidenavModule,
     MatFormFieldModule,
     MatInputModule,
-    MatSelectModule
+    MatSelectModule,
+    MatSnackBarModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]
