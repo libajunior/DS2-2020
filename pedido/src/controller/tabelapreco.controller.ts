@@ -1,15 +1,15 @@
 import { Request, Response } from "express";
 import { getRepository } from "typeorm";
-import { CidadeEntity } from "../entity/cidade.entity";
+import { TabelaPrecoEntity } from "../entity/tabelapreco.entity";
 
-class CidadeController {
+class TabelaPrecoController {
     
     public async findAll(req: Request, res: Response) {
 
         try {
 
-            const cidades: CidadeEntity[] = await getRepository(CidadeEntity).find();
-            res.send(cidades);
+            const tabelaprecos: TabelaPrecoEntity[] = await getRepository(TabelaPrecoEntity).find();
+            res.send(tabelaprecos);
 
         } catch (error) {
             res.status(500).send(error);
@@ -19,12 +19,12 @@ class CidadeController {
 
     public async create(req: Request, res: Response) {
 
-        const cidade = req.body;
+        const tabelapreco = req.body;
 
         try {
 
-            await getRepository(CidadeEntity).save( cidade );
-            res.status(201).send(cidade);
+            await getRepository(TabelaPrecoEntity).save( tabelapreco );
+            res.status(201).send(tabelapreco);
 
         } catch (error) {
             res.status(500).send(error);
@@ -37,11 +37,11 @@ class CidadeController {
 
         try {
             //Buscar o registro pela ID
-            const cidade = await getRepository(CidadeEntity).findOne(id);
+            const tabelapreco = await getRepository(TabelaPrecoEntity).findOne(id);
 
-            //Se não exnotrar uma cidade, devolve erro 404
-            if (cidade) {
-                res.send(cidade);    
+            //Se não encotrar uma tabela preco, devolve erro 404
+            if (tabelapreco) {
+                res.send(tabelapreco);    
             } else {
                 res.status(404).send({message: 'Record not found'})
             }
@@ -58,15 +58,15 @@ class CidadeController {
 
         try {
             //Buscar o registro pela ID
-            const cidade = await getRepository(CidadeEntity).findOne(id);
+            const tabelapreco = await getRepository(TabelaPrecoEntity).findOne(id);
 
-            //Se não exnotrar uma cidade, devolve erro 404
-            if (cidade) {
+            //Se não encotrar uma tabela preco, devolve erro 404
+            if (tabelapreco) {
                 //Atualizar o registro
-                await getRepository(CidadeEntity).update(cidade.id, novo);
+                await getRepository(TabelaPrecoEntity).update(tabelapreco.id, novo);
 
                 //Atualiza o ID do objeto novo
-                novo.id = cidade.id;
+                novo.id = tabelapreco.id;
                 
                 res.send(novo);
 
@@ -85,12 +85,12 @@ class CidadeController {
 
         try {
             //Buscar o registro pela ID
-            const cidade = await getRepository(CidadeEntity).findOne(id);
+            const tabelapreco = await getRepository(TabelaPrecoEntity).findOne(id);
 
-            //Se não exnotrar uma cidade, devolve erro 404
-            if (cidade) {
+            //Se não encotrar uma tabela preco, devolve erro 404
+            if (tabelapreco) {
                 //Excluir o registro
-                await getRepository(CidadeEntity).delete(cidade);
+                await getRepository(TabelaPrecoEntity).delete(tabelapreco);
 
                 res.status(204).send();
 
@@ -106,4 +106,4 @@ class CidadeController {
 
 }
 
-export default new CidadeController();
+export default new TabelaPrecoController();
