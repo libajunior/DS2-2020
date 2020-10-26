@@ -10,6 +10,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { CidadeComponent } from './cidade/cidade.component';
 import { TabelaprecoComponent } from './tabelapreco/tabelapreco.component';
+import { ClienteComponent } from './cliente/cliente.component';
+import { ProdutoComponent } from './produto/produto.component';
 
 import { ConfirmDialogComponent } from './_components/confirm-dialog/confirm-dialog.component';
 
@@ -27,14 +29,13 @@ import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatDialogModule} from '@angular/material/dialog';
-import { ProdutoComponent } from './produto/produto.component';
 
 
+/*
 //Locale do Brasil
 import localept from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
-import { ClienteComponent } from './cliente/cliente.component';
-registerLocaleData(localept, 'pt');
+registerLocaleData(localept, 'pt');*/
 
 @NgModule({
   declarations: [
@@ -66,7 +67,7 @@ registerLocaleData(localept, 'pt');
     MatDialogModule
   ],
   providers: [
-    {provide: LOCALE_ID, useValue: 'pt'}
+   /* {provide: LOCALE_ID, useValue: 'pt'}*/
   ],
   bootstrap: [AppComponent]
 })

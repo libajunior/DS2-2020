@@ -1,4 +1,3 @@
-import { TabelaPrecoEntity } from './../../../../pedido/src/entity/tabelapreco.entity';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSidenav } from '@angular/material/sidenav';
@@ -6,7 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ConfirmDialogComponent, ConfirmDialogOption } from '../_components/confirm-dialog/confirm-dialog.component';
 import { ClienteEntity, ClienteService } from '../_services/cliente.service';
 import { CidadeEntity, CidadeService } from '../_services/cidade.service';
-import { TabelaPrecoService } from '../_services/tabelapreco.service';
+import { TabelaPrecoEntity, TabelaPrecoService } from '../_services/tabelapreco.service';
 
 @Component({
   selector: 'app-cliente',
