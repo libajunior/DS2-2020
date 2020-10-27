@@ -86,4 +86,8 @@ export class PedidoEntity {
   dtpedido: Date;
   cliente: ClienteEntity;
   itens: ItemPedidoEntity[];
+
+  constructor() {
+    this.itens = [];
+  }
 }
