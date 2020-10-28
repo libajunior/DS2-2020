@@ -21,8 +21,6 @@ class ClienteController {
 
         const cliente = req.body;
 
-        console.log('Este aqui -> ', cliente);
-
         try {
 
             await getRepository(ClienteEntity).save( cliente );
