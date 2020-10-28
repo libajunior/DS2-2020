@@ -1,3 +1,4 @@
+import { Socket} from 'ngx-socket-io';
 import { MatSidenav } from '@angular/material/sidenav';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ProdutoService, ProdutoEntity } from '../_services/produto.service';
@@ -23,7 +24,7 @@ export class ProdutoComponent implements OnInit {
   @ViewChild(MatSidenav, {static: true}) sidenav: MatSidenav;
 
   constructor(private service: ProdutoService, private snackBar: MatSnackBar,
-              private dialog: MatDialog) { }
+              private dialog: MatDialog, private socketClient: Socket) { }
 
   /**
    * Método disparado na inicialização do componente, logo após sua construção 
@@ -50,6 +51,11 @@ export class ProdutoComponent implements OnInit {
       this.loading = false;
 
     });
+
+    //Listner do evento createProduto
+    this.socketClient.fromEvent('createProduto').subscribe(result => {
+      console.log(result)
+    })
   }
 
   /**

@@ -1,3 +1,4 @@
+import { environment } from './../environments/environment';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -36,11 +37,17 @@ import {MatListModule} from '@angular/material/list';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatBadgeModule} from '@angular/material/badge';
+
+//Socket.IO
+import {SocketIoModule, SocketIoConfig} from 'ngx-socket-io';
+const socketConfig: SocketIoConfig = {url: environment.urlSaaS, options:{}};
 
 
 //Locale do Brasil
 import localept from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
+import { TotalPedidoPipe } from './_pipes/total-pedido.pipe';
 registerLocaleData(localept, 'pt');
 
 @NgModule({
@@ -52,7 +59,8 @@ registerLocaleData(localept, 'pt');
     ProdutoComponent,
     ClienteComponent,
     PedidoComponent,
-    ItempedidoDialogComponent
+    ItempedidoDialogComponent,
+    TotalPedidoPipe
   ],
   imports: [
     BrowserModule,
@@ -77,7 +85,9 @@ registerLocaleData(localept, 'pt');
     MatDividerModule,
     MatTabsModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatBadgeModule,
+    SocketIoModule.forRoot(socketConfig)
   ],
   providers: [
    {provide: LOCALE_ID, useValue: 'pt'}

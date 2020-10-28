@@ -24,6 +24,14 @@ class ProdutoController {
         try {
 
             await getRepository(ProdutoEntity).save( produto );
+            
+            //Emitir um sinal para o socket cliente
+            try {
+                req.io.emit('createProduto', produto);
+            } catch(error) {
+                console.log(error)
+            }
+
             res.status(201).send(produto);
 
         } catch (error) {
@@ -91,6 +99,9 @@ class ProdutoController {
             if (produto) {
                 //Excluir o registro
                 await getRepository(ProdutoEntity).delete(produto);
+
+                //Emitir um sinal para o socket cliente
+                req.io.emit('deleteProduto', produto);
 
                 res.status(204).send();
 
