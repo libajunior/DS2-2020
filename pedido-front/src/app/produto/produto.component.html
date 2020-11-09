@@ -52,7 +52,7 @@
             </mat-card-title>
 
             <mat-card-content>
-                <table mat-table [dataSource]="produtos" *ngIf="!errorMessage">
+                <table mat-table [dataSource]="dataSource" *ngIf="!errorMessage">
                     <!-- CODIGO -->
                     <ng-container matColumnDef="codigo">
                         <th mat-header-cell *matHeaderCellDef>Código</th>

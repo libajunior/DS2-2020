@@ -1,3 +1,4 @@
+import { MatTableDataSource } from '@angular/material/table';
 import { Socket} from 'ngx-socket-io';
 import { MatSidenav } from '@angular/material/sidenav';
 import { Component, OnInit, ViewChild } from '@angular/core';
@@ -15,6 +16,8 @@ export class ProdutoComponent implements OnInit {
 
   public displayedColumns: string[] = ['codigo', 'nome', 'descricao', 'preco', 'options'];
   public produtos: ProdutoEntity[] = [];
+
+  public dataSource = new MatTableDataSource<ProdutoEntity>();
 
   public errorMessage: string;
   public loading: boolean;
@@ -40,6 +43,9 @@ export class ProdutoComponent implements OnInit {
       //Alimenta o datasource da tabela com a lista recebido da service
       this.produtos = result as [];
 
+      //Alimenta o datasource com os produtos
+      this.dataSource.data = this.produtos;
+
     }, error => {
 
       //Se ocorreu algum erro neste processo, mostra mensagem para usuário
@@ -54,7 +60,28 @@ export class ProdutoComponent implements OnInit {
 
     //Listner do evento createProduto
     this.socketClient.fromEvent('createProduto').subscribe(result => {
-      console.log(result)
+      this.produtos.push(result as ProdutoEntity)
+      this.dataSource.data = this.produtos;
+    })
+
+    //Listner do evento deleteProduto
+    this.socketClient.fromEvent('deleteProduto').subscribe(result => {
+      let produto = result as ProdutoEntity;
+      let index = this.produtos.findIndex( item => item.id == produto.id);
+
+      this.produtos.splice(index, 1);
+
+      this.dataSource.data = this.produtos;
+    })
+
+    //Listner do evento createProduto
+    this.socketClient.fromEvent('updateProduto').subscribe(result => {
+      let produto = result as ProdutoEntity;
+      let index = this.produtos.findIndex( item => item.id == produto.id);
+
+      this.produtos[index] = produto;
+
+      this.dataSource.data = this.produtos;
     })
   }
 

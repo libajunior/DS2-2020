@@ -71,6 +71,11 @@ class ProdutoController {
 
                 //Atualiza o ID do objeto novo
                 novo.id = produto.id;
+
+                const updated = await getRepository(ProdutoEntity).findOne(id);
+
+                //Emitir um sinal para o socket cliente
+                req.io.emit('updateProduto', updated);
                 
                 res.send(novo);
 
