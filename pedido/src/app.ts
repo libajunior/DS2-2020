@@ -19,7 +19,7 @@ export class App {
         this.express = express();
 
         this.middleware();
-        this.socket();
+        this.socket();//Somente se utilizar socket
         this.routes();
     }
 
@@ -28,12 +28,14 @@ export class App {
         this.express.use(cors());
     }
 
+    //Somente se utilizar socket
     private socket(): void {
         this.server = createServer( this.express );
         this.io = socketIO(this.server);
     }
 
     private routes(): void {
+        //Somente se utilizar socket
         this.express.use((req, res, next) => {
             req.io = this.io;
             
