@@ -1,3 +1,5 @@
+import { CandidatoEntity } from './candidato.service';
+import { EleitorEntity } from './eleitor.service';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -73,6 +75,11 @@ export class VotacaoService {
 
 export class VotacaoEntity {
   id: number;
-  nome: string;
-  codigo: string;
+  dthrvotacao: Date;
+  eleitor: EleitorEntity;
+  candidato: CandidatoEntity;
+
+  constructor() {
+    this.dthrvotacao = new Date();
+  }
 }
